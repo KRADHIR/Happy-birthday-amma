@@ -1,20 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Birthday Wishes</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap');
+
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      overflow-x: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #444;
+    }
+
+    /* Animated bubble background */
+    .bubbles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      opacity: 0.7;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2));
+      box-shadow: 0 0 15px 3px rgba(255, 255, 255, 0.2);
+    }
+
+    /* Message container with glassmorphism */
+    .message-container {
+      position: relative;
+      background: rgba(255 255 255 / 0.25);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      box-shadow:
+        0 4px 30px rgba(0, 0, 0, 0.1);
+      padding: 2.5rem 3rem 3rem;
+      max-width: 600px;
+      text-align: center;
+      z-index: 1;
+      animation: fadeInUp 1.5s ease forwards;
+    }
+
+    /* Heading with a cursive font and a subtle glow animation */
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      color: #fff;
+      margin-bottom: 0.7rem;
+      text-shadow:
+        0 0 6px #ff7e5f,
+        0 0 10px #feb47b;
+      animation: glow 3s ease-in-out infinite alternate;
+      line-height: 1.2;
+    }
+
+    /* Paragraph styling */
+    p {
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 2rem;
+      line-height: 1.4;
+      font-weight: 500;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      letter-spacing: 0.02em;
+    }
+
+    /* Animated audio player */
+    audio {
+      width: 100%;
+      max-width: 350px;
+      outline: none;
+      border-radius: 10px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+    audio:hover,
+    audio:focus {
+      opacity: 1;
+      box-shadow:
+        0 4px 25px rgba(255, 126, 95, 0.8),
+        0 0 10px rgba(255, 126, 95, 0.6);
+      outline: none;
+    }
+
+    /* Responsive sizing */
+    @media (max-width: 480px) {
+      .message-container {
+        padding: 2rem 1.5rem 2.5rem;
+        max-width: 90vw;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+
+    /* Animations */
+    @keyframes glow {
+      from {
+        text-shadow:
+          0 0 6px #ff7e5f,
+          0 0 10px #feb47b;
+      }
+      to {
+        text-shadow:
+          0 0 20px #ff6347,
+          0 0 35px #ff7e5f;
+      }
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="message-container">
+
+  <div class="bubbles" aria-hidden="true"></div>
+
+  <div class="message-container" role="main" aria-label="Birthday wishes message">
     <h1>Happy Birthday to the amazing woman who makes every day brighter!</h1>
     <p>Mom, your love and guidance have shaped who I am, and I'm so grateful for everything you do. Wishing you a day filled with joy, laughter, and all the happiness you deserve!</p>
     <audio controls autoplay>
-      <source src="song.mp3" type="audio/mp3">
+      <source src="song.mp3" type="audio/mp3" />
       Your browser does not support the audio element.
     </audio>
   </div>
+
+  <script>
+    // Bubble animation script
+    const bubbleContainer = document.querySelector('.bubbles');
+    const bubbleCount = 25;
+
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function createBubble() {
+      const bubble = document.createElement('div');
+      const size = randomInt(20, 60);
+      bubble.style.width = size + 'px';
+      bubble.style.height = size + 'px';
+      bubble.classList.add('bubble');
+      bubble.style.left = randomInt(0, window.innerWidth) + 'px';
+      bubble.style.animationDuration = (randomInt(7000, 15000) / 1000) + 's';
+      bubble.style.animationName = 'rise';
+      bubble.style.animationTimingFunction = 'linear';
+      bubble.style.animationIterationCount = 'infinite';
+      bubble.style.opacity = (Math.random() * 0.3 + 0.4).toFixed(2);
+
+      bubbleContainer.appendChild(bubble);
+
+      bubble.addEventListener('animationiteration', () => {
+        bubble.style.left = randomInt(0, window.innerWidth) + 'px';
+        bubble.style.opacity = (Math.random() * 0.3 + 0.4).toFixed(2);
+        bubble.style.animationDuration = (randomInt(7000, 15000) / 1000) + 's';
+      });
+    }
+
+    for(let i = 0; i < bubbleCount; i++) {
+      createBubble();
+    }
+  </script>
+
+  <style>
+    @keyframes rise {
+      0% {
+        transform: translateY(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-120vh);
+        opacity: 0;
+      }
+    }
+  </style>
+
 </body>
 </html>
 
