@@ -1,21 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Happy Birthday, Mom</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap');
+
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body, html {
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #444;
+      overflow: hidden;
+    }
+
+    /* Container styling */
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      animation: fadeIn 1s ease forwards;
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      width: 100%;
+    }
+
+    /* Heading styling */
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: #ff6f61;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      animation: bounce 1.5s infinite alternate;
+    }
+
+    /* Image gallery styling */
+    .images {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 1.5rem;
+    }
+
+    .image {
+      width: 150px;
+      height: 150px;
+      border-radius: 15px;
+      object-fit: cover;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .image:nth-child(1) { animation-delay: 0.1s; }
+    .image:nth-child(2) { animation-delay: 0.2s; }
+    .image:nth-child(3) { animation-delay: 0.3s; }
+    .image:nth-child(4) { animation-delay: 0.4s; }
+
+    .image:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+    }
+
+    /* Button styling */
+    .btn {
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:hover {
+      background-color: #ff4c3b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Responsive styling */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      .image {
+        width: 120px;
+        height: 120px;
+      }
+      .btn {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>Happy Birthday, Mom!</h1>
     <div class="images">
-      <img src="mom1.jpg" alt="Mom 1" class="image">
-      <img src="mom2.jpg" alt="Mom 2" class="image">
-      <img src="mom3.jpg" alt="Mom 3" class="image">
-      <img src="mom4.jpg" alt="Mom 4" class="image">
+      <img src="mom1.jpg" alt="Mom 1" class="image" />
+      <img src="mom2.jpg" alt="Mom 2" class="image" />
+      <img src="mom3.jpg" alt="Mom 3" class="image" />
+      <img src="mom4.jpg" alt="Mom 4" class="image" />
     </div>
     <button class="btn" onclick="window.location.href='birthday.html'">Click me, Mom</button>
   </div>
 </body>
 </html>
+
